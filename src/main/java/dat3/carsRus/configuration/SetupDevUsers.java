@@ -1,5 +1,7 @@
 package dat3.carsRus.configuration;
 
+import dat3.carsRus.entity.Member;
+import dat3.carsRus.repository.MemberRepository;
 import dat3.security.entity.Role;
 import dat3.security.entity.UserWithRoles;
 import org.springframework.boot.ApplicationArguments;
@@ -12,9 +14,11 @@ public class SetupDevUsers implements ApplicationRunner {
 
     UserWithRolesRepository userWithRolesRepository;
     String passwordUsedByAll;
+    MemberRepository memberRepository;
 
-    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository) {
+    public SetupDevUsers(UserWithRolesRepository userWithRolesRepository, MemberRepository memberRepository) {
         this.userWithRolesRepository = userWithRolesRepository;
+        this.memberRepository = memberRepository;
         passwordUsedByAll = "test12";
     }
 
@@ -43,5 +47,10 @@ public class SetupDevUsers implements ApplicationRunner {
         userWithRolesRepository.save(user1);
         userWithRolesRepository.save(user2);
         userWithRolesRepository.save(user3);
+
+
+
+
+
     }
 }
