@@ -1,5 +1,6 @@
 package dat3.carsRus.entity;
 
+import dat3.security.entity.Role;
 import dat3.security.entity.UserWithRoles;
 import javax.persistence.Entity;
 
@@ -18,12 +19,12 @@ public class Member extends UserWithRoles {
 
     private boolean isApproved;
 
-    private int ranking;
+    private Role role;
 
     public Member(){}
 
     public Member(String user, String password, String email, String firstName, String lastName, String street,
-                  String city, int zipCode, boolean isApproved, int ranking){
+                  String city, int zipCode, boolean isApproved, Role role){
         super(user, password, email);
         this.city = city;
         this.firstName = firstName;
@@ -31,7 +32,7 @@ public class Member extends UserWithRoles {
         this.isApproved = isApproved;
         this.street = street;
         this.zipCode = zipCode;
-        this.ranking = ranking;
+        this.role = role;
 
     }
 
