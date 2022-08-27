@@ -2,6 +2,7 @@ package dat3.carsRus.configuration;
 
 import dat3.carsRus.entity.Car;
 import dat3.carsRus.repository.CarRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class setUpCar implements ApplicationRunner {
 
+    @Autowired //<--- Hvis fjernes, påstår den at carRepository er Null
     CarRepository carRepository;
 
     public void setUpCar(CarRepository carRepository){
