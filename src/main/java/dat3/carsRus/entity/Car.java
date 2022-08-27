@@ -23,11 +23,11 @@ public class Car {
     private int bestDiscount;
 
     @CreationTimestamp
-    @Column(name = "Oprettet")
+    @Column(name = "Created")
     private LocalDateTime created;
 
     @UpdateTimestamp
-    @Column(name = "Sidste ændret")
+    @Column(name = "Edited")
     private LocalDateTime edited;
 
     public Car(String brand, String model, int pricePerDay, int bestDiscount) {

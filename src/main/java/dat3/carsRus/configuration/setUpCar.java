@@ -6,7 +6,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
-/*
+
 @RestController
 public class setUpCar implements ApplicationRunner {
 
@@ -28,4 +28,4 @@ public class setUpCar implements ApplicationRunner {
 
     }
 }
-*/
+
