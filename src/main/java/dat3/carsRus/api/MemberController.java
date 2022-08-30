@@ -1,28 +1,59 @@
 package dat3.carsRus.api;
 
-import dat3.carsRus.repository.MemberRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import dat3.carsRus.dto.MemberRequest;
+import dat3.carsRus.dto.MemberResponse;
+import dat3.carsRus.service.MemberService;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
+@RequestMapping("api/members")
 public class MemberController {
 
+    MemberService memberService;
 
-    MemberRepository memberRepository;
-
-
-    public MemberController(MemberRepository memberRepository){
-        this.memberRepository = memberRepository;
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
     }
 
-
-    @GetMapping("/api/members")
-    public String showMembers(){
-        return memberRepository.findAll().toString();
+    //Security ADMIN ???
+    @GetMapping
+    List<MemberResponse> getMembers() {
+        return memberService.findMembers();
     }
 
+    //Security ADMIN ???
+    @GetMapping(path = "/{username}")
+    MemberResponse getMemberById(@PathVariable String username) throws Exception {
+        return memberService.findMemberByUsername(username);
+    }
 
+    //Security --> USER??????
+    //@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
+    // same as above when you are using @RestController
+    MemberResponse addMember(@RequestBody MemberRequest body) {
+        return memberService.addMember(body);
+    }
 
+    //Security ADMIN/USER ??? ???
+    @PutMapping("/{username}")
+    ResponseEntity<Boolean> editMember(@RequestBody MemberRequest body, @PathVariable String username) {
+        return null;
+    }
+
+    //Security ADMIN ????
+    @PatchMapping("/ranking/{username}/{value}")
+    void setRankingForUser(@PathVariable String username, @PathVariable int value) {
+    }
+
+    // Security ADMIN ????
+    @DeleteMapping("/{username}")
+    void deleteMemberByUsername(@PathVariable String username) {
+    }
 
 
 }

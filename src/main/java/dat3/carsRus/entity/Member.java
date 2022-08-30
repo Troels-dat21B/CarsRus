@@ -30,6 +30,8 @@ public class Member extends UserWithRoles {
 
     private Role role;
 
+    private int ranking;
+
 
     public Member(String user, String password, String email, String firstName, String lastName, String street, String city, String zip) {
         super(user, password, email);
