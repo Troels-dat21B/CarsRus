@@ -27,7 +27,8 @@ public class SetupDevUsers implements ApplicationRunner {
         //setupUserWithRoleUsers();
 
         Member member1 = new Member("Trowsel", passwordUsedByAll, "w@e.com", "Troels", "Karn", "Rebæk", "Hvidovre",
-                2650, true, Role.USER);
+                "2650");
+
 
         memberRepository.save(member1);
 

@@ -20,9 +20,9 @@ class MemberRepositoryTest {
     @BeforeAll
     public static void setUpData(@Autowired MemberRepository memberRepository){
         Member mem1 = new Member("rr", "cc", "t@g.com", "kk",
-                "ll", "oo", "gg", 222, true, Role.USER);
+                "ll", "oo", "gg", "222");
 
-
+        mem1.addRole(Role.USER);
         memberRepository.save(mem1);
 
         member1 = mem1.getUsername();
