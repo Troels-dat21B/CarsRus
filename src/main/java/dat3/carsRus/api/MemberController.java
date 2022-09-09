@@ -3,6 +3,7 @@ package dat3.carsRus.api;
 import dat3.carsRus.dto.MemberRequest;
 import dat3.carsRus.dto.MemberResponse;
 import dat3.carsRus.service.MemberService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,9 +21,10 @@ public class MemberController {
 
     //Security ADMIN ???
     @GetMapping
-    List<MemberResponse> getMembers() {
-        return memberService.findMembers();
+    List<MemberResponse> getMembers(){
+        return memberService.getMembers(false);
     }
+
 
     //Security ADMIN ???
     @GetMapping(path = "/{username}")
@@ -30,29 +32,34 @@ public class MemberController {
         return memberService.findMemberByUsername(username);
     }
 
-    //Security --> USER??????
+    //Security --> USER ??????
     //@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @PostMapping
     // same as above when you are using @RestController
-    MemberResponse addMember(@RequestBody MemberRequest body) {
-        return memberService.addMember(body);
+    MemberResponse addMember(@RequestBody MemberRequest body){
+        MemberResponse res = memberService.addMember(body);
+        return res;
     }
 
-    //Security ADMIN/USER ??? ???
+
+    //Security USER/ADMIN ???
     @PutMapping("/{username}")
-    ResponseEntity<Boolean> editMember(@RequestBody MemberRequest body, @PathVariable String username) {
-        return null;
+    ResponseEntity<Boolean> editMember(@RequestBody MemberRequest body, @PathVariable String username){
+        memberService.editMember(body,username);
+        return new ResponseEntity<>(true, HttpStatus.OK);
     }
 
     //Security ADMIN ????
     @PatchMapping("/ranking/{username}/{value}")
     void setRankingForUser(@PathVariable String username, @PathVariable int value) {
+        memberService.setRankingForUser(username,value);
     }
+
 
     // Security ADMIN ????
     @DeleteMapping("/{username}")
     void deleteMemberByUsername(@PathVariable String username) {
+        memberService.deleteByUsername(username);
     }
-
 
 }

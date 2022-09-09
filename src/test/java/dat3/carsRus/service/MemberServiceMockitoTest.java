@@ -38,7 +38,7 @@ class MemberServiceMockitoTest {
                 new Member("m1", "pw", "m1@a.dk", "aa", "aaa", "aaaa", "aaaa", "1234"),
                 new Member("m2", "pw", "mm@a.dk", "bb", "bbb", "bbbb", "bbbb", "1234")
         ));
-        List<MemberResponse> members = memberService.findMembers();
+        List<MemberResponse> members = memberService.getMembers(true);
         assertEquals(2, members.size());
     }
 

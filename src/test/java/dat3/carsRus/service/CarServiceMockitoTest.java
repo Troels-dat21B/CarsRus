@@ -44,7 +44,7 @@ class CarServiceMockitoTest {
                 new Car("Honda", "something", 1500, 50),
                 new Car("Mazda", "something2", 7000, 25)
         ));
-        List<CarResponse> cars = carService.findCars();
+        List<CarResponse> cars = carService.getCars();
         assertEquals(2, cars.size());
     }
 
@@ -75,7 +75,7 @@ class CarServiceMockitoTest {
         CarRequest request = new CarRequest(c);
         Mockito.when(carRepository.findById(1000)).thenReturn(Optional.of(c));
         CarResponse response = carService.findCarById(1000);
-        carService.editcar(request,1000);
+        carService.editCar(request,1000);
 
         assertEquals("Honda", response.getBrand());
         assertEquals("something", response.getModel());
@@ -83,15 +83,15 @@ class CarServiceMockitoTest {
         assertEquals(50, response.getBestDiscount());
     }
 
-    @Test
-    void deleteById() {
-        /*Car c = new Car("Honda", "something", 1500, 50);
+    /*@Test
+    void deleteById(int id) {
+        Car c = new Car("Honda", "something", 1500, 50);
         c.setId(1000);
-        Mockito.when(carRepository.existsById(1000)).thenReturn(c);
+        Mockito.when(carRepository.existsById(1000)).thenReturn(Optional.of(c));
         //carService.findCarById(1000);
         System.out.println(c);
         carRepository.deleteById(1000);
         System.out.println(c);
-        assertEquals(0,carRepository.count());*/
-    }
+        assertEquals(0,carRepository.count());
+    }*/
 }
