@@ -1,12 +1,21 @@
 package dat3.carsRus.entity;
 
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+@Setter
+@Getter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Car {
 
     @Id
@@ -21,6 +30,10 @@ public class Car {
     private int pricePerDay;
 
     private int bestDiscount;
+
+    private LocalDateTime reservation;
+
+    private LocalDate rental;
 
     @CreationTimestamp
     @Column(name = "Created")
@@ -37,60 +50,13 @@ public class Car {
         this.bestDiscount = bestDiscount;
     }
 
-    public Car(){};
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
+    private List<Reservation> reservations = new ArrayList<>();
 
-    //region Gettere og Settere
-
-    public int getId() {
-        return id;
+    public void addReservation(Reservation reservation){
+        reservations.add(reservation);
+        reservation.setCar(this);
     }
 
-    public String getBrand() {
-        return brand;
-    }
 
-    public String getModel() {
-        return model;
-    }
-
-    public int getPricePerDay() {
-        return pricePerDay;
-    }
-
-    public int getBestDiscount() {
-        return bestDiscount;
-    }
-
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public LocalDateTime getEdited() {
-        return edited;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public void setPricePerDay(int pricePerDay) {
-        this.pricePerDay = pricePerDay;
-    }
-
-    public void setBestDiscount(int bestDiscount) {
-        this.bestDiscount = bestDiscount;
-    }
-
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
-    }
-
-    public void setEdited(LocalDateTime edited) {
-        this.edited = edited;
-    }
-    //endregion
 }

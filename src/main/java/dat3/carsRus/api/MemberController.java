@@ -3,8 +3,6 @@ package dat3.carsRus.api;
 import dat3.carsRus.dto.MemberRequest;
 import dat3.carsRus.dto.MemberResponse;
 import dat3.carsRus.service.MemberService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,9 +41,7 @@ public class MemberController {
     //Security ADMIN/USER ??? ???
     @PutMapping("/{username}")
     ResponseEntity<Boolean> editMember(@RequestBody MemberRequest body, @PathVariable String username) {
-        memberService.editMember(body, username);
-        return new ResponseEntity<>(true, HttpStatus.OK);
-
+        return null;
     }
 
     //Security ADMIN ????
